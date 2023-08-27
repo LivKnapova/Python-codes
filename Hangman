@@ -1,0 +1,91 @@
+import random
+stages = ['''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ / \  |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ /    |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|   |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+  |   |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+      |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+      |
+      |
+      |
+      |
+=========
+''']
+word_list = ["aardvark", "baboon", "camel"]
+lives = 6 
+chosen_word = random.choice(word_list) 
+display = []
+
+#Show how many letters has the word.
+for _ in range(len(chosen_word)): 
+  display += "_" 
+print(display)
+
+end_of_game = False 
+
+#Check guessed letter.
+while not end_of_game: 
+  guess = input("Guess a letter: ").lower()
+  for  position in range(len(chosen_word)):
+    letter = chosen_word[position]
+    if letter == guess: 
+      display[position] = letter 
+  print(display) 
+
+#If guess is not a letter in the chosen_word, then it reduces 'lives' by 1.
+  if guess not in chosen_word: 
+    lives -= 1 
+    if lives == 0: 
+      end_of_game = True
+      print("You loose.") 
+
+  #Check if user has got all letters.
+  if "_" not in display and lives >= 0: 
+    end_of_game = True
+    print("You win.")  
+
+  print(stages[lives])
